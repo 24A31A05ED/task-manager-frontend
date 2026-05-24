@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://task-manager-3itu.onrender.com/api"
+  baseURL: "https://task-manager-3itu.onrender.com/api/tasks"
 });
 
 export default API;

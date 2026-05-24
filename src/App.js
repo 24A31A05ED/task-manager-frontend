@@ -5,24 +5,29 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
 
+  // Fetch all tasks
   const fetchTasks = async () => {
     try {
       const res = await API.get("/tasks");
       setTasks(res.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
+  // Add new task
   const addTask = async () => {
-    if (!title) return;
+    if (!title.trim()) return;
 
     try {
-      const res = await API.post("/tasks", { title });
+      const res = await API.post("/tasks", {
+        title,
+      });
+
       setTasks([...tasks, res.data]);
       setTitle("");
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -39,9 +44,12 @@ function App() {
         placeholder="Enter task"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        style={{ padding: "10px", marginRight: "10px" }}
       />
 
-      <button onClick={addTask}>Add Task</button>
+      <button onClick={addTask} style={{ padding: "10px" }}>
+        Add Task
+      </button>
 
       <ul>
         {tasks.map((task) => (
